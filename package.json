@@ -1,0 +1,19 @@
+{
+  "name": "twitterbot",
+  "version": "1.0.0",
+  "description": "twitter bot",
+  "main": "bot.js",
+  "scripts": {
+    "test": "node bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielbauman1010/twitterbot.git"
+  },
+  "author": "Daniel Bauman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danielbauman1010/twitterbot/issues"
+  },
+  "homepage": "https://github.com/danielbauman1010/twitterbot#readme"
+}
