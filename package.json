@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/danielbauman1010/twitterbot/issues"
   },
-  "homepage": "https://github.com/danielbauman1010/twitterbot#readme"
+  "homepage": "https://github.com/danielbauman1010/twitterbot#readme",
+  "dependencies": {
+    "twit": "^2.2.11"
+  }
 }
