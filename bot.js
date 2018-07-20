@@ -1,73 +1,30 @@
-var twit = require('twit');
-var config = require('./config.js');
+var api = require('./api.js')
+var express = require('express');
+var path = require('path');
 
-var Twitter = new twit(config);
+var server = express();
 
-var hashtag = "#resist";
-Twitter.get('search/tweets', {q: "#resist -filter:retweets -filter:replies", tweet_mode: 'extended',count: 10}, function(err, res){
-  if(err){
-    console.log(err);
-  } else {
-    var statusList = res.statuses;
-    for(tweetIndex in statusList) {
-      let tweet = statusList[tweetIndex];
-      console.log(tweet.full_text);
-      console.log(tweet.full_text.length);
-      console.log(tweet.created_at);
-      console.log('\n\n\n');
-    }
-  }
+server.get('/', function(req,res){
+  res.sendFile(path.join(__dirname,'index.html'));
 });
 
-
-/*
-
-Retweet test: Works.
-
-Twitter.get('search/tweets', {q: "#bitcoin", count: 10}, function(err, reply){
-  if(err){
-    console.log(err);
-  } else {
-    var tweet = reply.statuses[0];
-  	Twitter.post('statuses/retweet/:id', { id: tweet.id_str }, function(){
-      console.log("Success.");
-    });
-  }
+server.get('/expand',function(req,res){
+  var hashtagList = req.query.list;
+  var count = Number(req.query.count);
+  api.expandHashtags(hashtagList.split(' '),count).then(function(results){
+    res.end(""+results);
+  },function(err){
+    res.end(err);
+  })
 });
 
-*/
+//
+// api.expandHashtags(["#Trump", "#Putin", "#helsinki"], 5).then(function(results){
+//   console.log(results);
+// }, function(err){
+//   console.log(err);
+// })
 
-
-
-
-
-/*
-
-Favorite test: Works.
-
-Twitter.get('search/tweets', {q: 'hello world! //twitted by a bot', count: 1}, function(err,reply){
-  if(err){
-    console.log(err);
-  } else {
-    var tweet = reply.statuses[0];
-    Twitter.post('favorites/create', {id: tweet.id_str}, function(){
-      console.log("Success.");
-    });
-  }
-});
-
-*/
-
-
-
-
-
-/*
-
-Posting test: Works.
-
-Twitter.post('statuses/update', { status: 'hello world! //twitted by a bot' }, function(err, data, response) {
-  console.log(data)
-});
-
-*/
+server.listen(3000);
+console.log("To use, enter the following address. To stop the process, press Ctrl and C simultaneously.");
+console.log("http://localhost:3000/");
