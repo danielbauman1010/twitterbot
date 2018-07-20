@@ -3,8 +3,21 @@ var config = require('./config.js');
 
 var Twitter = new twit(config);
 
-
-
+var hashtag = "#resist";
+Twitter.get('search/tweets', {q: "#resist -filter:retweets -filter:replies", tweet_mode: 'extended',count: 10}, function(err, res){
+  if(err){
+    console.log(err);
+  } else {
+    var statusList = res.statuses;
+    for(tweetIndex in statusList) {
+      let tweet = statusList[tweetIndex];
+      console.log(tweet.full_text);
+      console.log(tweet.full_text.length);
+      console.log(tweet.created_at);
+      console.log('\n\n\n');
+    }
+  }
+});
 
 
 /*
