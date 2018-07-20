@@ -18,13 +18,6 @@ server.get('/expand',function(req,res){
   })
 });
 
-//
-// api.expandHashtags(["#Trump", "#Putin", "#helsinki"], 5).then(function(results){
-//   console.log(results);
-// }, function(err){
-//   console.log(err);
-// })
-
 server.listen(3000);
 console.log("To use, enter the following address. To stop the process, press Ctrl and C simultaneously.");
 console.log("http://localhost:3000/");

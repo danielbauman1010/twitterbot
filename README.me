@@ -1,0 +1,37 @@
+Pattern Bot (v 0.1)
+
+To use, make sure you have node and npm.
+
+Install on:
+
+https://www.npmjs.com/get-npm
+
+Then, log on to Twitter and create an application on:
+
+https://apps.twitter.com/
+
+Once you've created an application, generate your access Token.
+
+Next, create a file called config.js in the main project folder, with the following format:
+
+module.exports = {
+  consumer_key: '',
+  consumer_secret: '',
+  access_token: '',
+  access_token_secret: ''
+}
+
+Fill the fields with the correspondent information of your Twitter app.
+
+Once you're setup, run the following commands on a terminal or command line at the main folder of the project:
+
+npm install
+node bot.js
+
+This will run a local server, where you may use your browser to expand a list of hashtags using the html interface.
+
+To stop the server, press the
+Ctrl
+and
+c
+buttons on your keyboard, simultaneously.
