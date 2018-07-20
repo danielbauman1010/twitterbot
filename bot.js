@@ -1,73 +1,13 @@
-var twit = require('twit');
-var config = require('./config.js');
+var api = require('./api.js')
 
-var Twitter = new twit(config);
+var hashtaglist = ["#dc", "#marvel"];
 
-var hashtag = "#resist";
-Twitter.get('search/tweets', {q: "#resist -filter:retweets -filter:replies", tweet_mode: 'extended',count: 10}, function(err, res){
-  if(err){
-    console.log(err);
-  } else {
-    var statusList = res.statuses;
-    for(tweetIndex in statusList) {
-      let tweet = statusList[tweetIndex];
-      console.log(tweet.full_text);
-      console.log(tweet.full_text.length);
-      console.log(tweet.created_at);
-      console.log('\n\n\n');
-    }
+api.searchTweets(hashtaglist[0], 10).then(function(results){
+  for(i in results) {
+    console.log("\n"+i);
+    console.log(results[i].full_text);
+    console.log("\n\n\n");
   }
+},function(err){
+  console.log(err);
 });
-
-
-/*
-
-Retweet test: Works.
-
-Twitter.get('search/tweets', {q: "#bitcoin", count: 10}, function(err, reply){
-  if(err){
-    console.log(err);
-  } else {
-    var tweet = reply.statuses[0];
-  	Twitter.post('statuses/retweet/:id', { id: tweet.id_str }, function(){
-      console.log("Success.");
-    });
-  }
-});
-
-*/
-
-
-
-
-
-/*
-
-Favorite test: Works.
-
-Twitter.get('search/tweets', {q: 'hello world! //twitted by a bot', count: 1}, function(err,reply){
-  if(err){
-    console.log(err);
-  } else {
-    var tweet = reply.statuses[0];
-    Twitter.post('favorites/create', {id: tweet.id_str}, function(){
-      console.log("Success.");
-    });
-  }
-});
-
-*/
-
-
-
-
-
-/*
-
-Posting test: Works.
-
-Twitter.post('statuses/update', { status: 'hello world! //twitted by a bot' }, function(err, data, response) {
-  console.log(data)
-});
-
-*/
