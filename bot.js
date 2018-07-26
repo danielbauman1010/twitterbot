@@ -12,7 +12,14 @@ server.get('/expand',function(req,res){
   var hashtagList = req.query.list;
   var count = Number(req.query.count);
   api.expandHashtags(hashtagList.split(' '),count).then(function(results){
-    res.end(""+results);
+    let response = "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"><link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css\" integrity=\"sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B\" crossorigin=\"anonymous\"></head><body><div class=\"container-fluid\"><ul class=\"list-group\">";
+    let counter = 0;
+    for(i in results){
+      response += "<li class=\"list-group-item\">"+results[i]+"</li>";
+      counter++;
+    }
+    response += "</ul><p>found "+counter+" hashtags</p><a href=\"/\">Back</a></div></body></html>";
+    res.end(response);
   },function(err){
     res.end(err);
   })
